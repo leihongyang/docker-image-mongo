@@ -19,9 +19,14 @@ rs.initiate(cfg)
 # 开启认证
 
 将mongo.conf中的注释取消，使用
-openssl rand -base64 745 > /data/db/mongodb.key && chmod 600 /data/db/mongodb.key 生成的key放到当前目录，重新build镜像
+```
+openssl rand -base64 745 > /data/db/mongodb.key && chmod 600 /data/db/mongodb.key 
+```
+生成的key放到当前目录，重新build镜像
 
 然后初始化集群后创建超级管理员
+```
 use admin
 db.createUser({user: "root", pwd: "qwe", roles: [{role: "root", db: "admin"}]})
 exit
+```
