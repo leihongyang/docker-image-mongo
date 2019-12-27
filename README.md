@@ -15,3 +15,13 @@ cfg={ _id:"test_db", members:[ {_id:0,host:'192.168.0.235:27017',priority:2}, {_
 
 rs.initiate(cfg)
 ```
+
+# 开启认证
+
+将mongo.conf中的注释取消，使用
+openssl rand -base64 745 > /data/db/mongodb.key && chmod 600 /data/db/mongodb.key 生成的key放到当前目录，重新build镜像
+
+然后初始化集群后创建超级管理员
+use admin
+db.createUser({user: "root", pwd: "qwe", roles: [{role: "root", db: "admin"}]})
+exit
